@@ -40,6 +40,7 @@ analysis_benchmark.json
 .packages
 .pub-preload-cache/
 .pub/
+.pub-cache/
 build/
 flutter_*.png
 linked_*.ds
@@ -117,3 +118,9 @@ app.*.symbols
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
+
+# IDE related
+*.iml
+*.ipr
+*.iws
+.idea/*
