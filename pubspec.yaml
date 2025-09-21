@@ -22,19 +22,32 @@ dependencies:
   # Dependency Injection
   get_it: ^8.2.0
 
+  shared_preferences: ^2.5.3
+  connectivity_plus: ^7.0.0
+  
+  # HTTP client
+  dio: ^5.9.0
+  
+  # JSON serialization
+  json_annotation: ^4.8.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^6.0.0
+  bloc_test: ^10.0.0
+  
+  # Code generation
+  json_serializable: ^6.7.1
+  build_runner: ^2.4.7
 
 flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section below.
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/json/
 
   # To add fonts to your application, add a fonts section here.
   # fonts:
