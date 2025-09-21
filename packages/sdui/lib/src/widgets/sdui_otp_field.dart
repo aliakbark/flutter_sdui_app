@@ -29,7 +29,7 @@ class _SduiOtpFieldState extends State<SduiOtpField> {
   void initState() {
     super.initState();
 
-    final properties = widget.config.properties as Map<String, dynamic>? ?? {};
+    final properties = widget.config.properties ?? <String, dynamic>{};
     _length = properties['length'] as int? ?? 6;
 
     _controllers = List.generate(_length, (index) => TextEditingController());

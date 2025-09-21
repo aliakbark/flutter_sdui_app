@@ -160,8 +160,12 @@ class SduiWorkflowController extends ChangeNotifier {
 
   /// Execute navigate action
   void _executeNavigateAction(ActionConfig action) {
-    // This would be handled by the parent widget
-    // For now, we'll just trigger the success handler
+    // Navigate to the screen specified in capability field
+    if (action.capability != null) {
+      navigateToScreen(action.capability!);
+    }
+    
+    // Also handle success result if provided
     _handleActionSuccess(action.onSuccess, null);
   }
 

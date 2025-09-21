@@ -8,20 +8,19 @@ class SduiSpacer extends StatelessWidget {
   final ThemeTokens themeTokens;
 
   const SduiSpacer({
-    Key? key,
+    super.key,
     required this.config,
     required this.themeTokens,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    final properties = config.properties as Map<String, dynamic>? ?? {};
-    final height = TypeUtils.toDouble(properties['height']) ?? themeTokens.getSpaceMd();
-    final width = TypeUtils.toDouble(properties['width']);
+    final Map<String, dynamic> properties =
+        config.properties ?? <String, dynamic>{};
+    final double height =
+        TypeUtils.toDouble(properties['height']) ?? themeTokens.getSpaceMd();
+    final double? width = TypeUtils.toDouble(properties['width']);
 
-    return SizedBox(
-      height: height,
-      width: width,
-    );
+    return SizedBox(height: height, width: width);
   }
 }

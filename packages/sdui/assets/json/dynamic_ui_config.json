@@ -1,0 +1,72 @@
+{
+  "app_version_min": "1.0.0",
+  "theme_tokens": {
+    "color.primary": "#007AFF",
+    "color.bg": "#FFFFFF",
+    "color.text": "#000000",
+    "radius.md": 8.0,
+    "space.sm": 8.0,
+    "space.md": 16.0,
+    "font.family": "SF Pro Display"
+  },
+  "workflows": [
+    {
+      "id": "user_onboarding",
+      "start_screen": "welcome_screen",
+      "screens": [
+        {
+          "id": "welcome_screen",
+          "title": "Welcome",
+          "widgets": [
+            {
+              "id": "welcome_text",
+              "type": "text",
+              "label": "Welcome to our app!"
+            },
+            {
+              "id": "continue_button",
+              "type": "button",
+              "label": "Continue",
+              "action": {
+                "type": "navigate",
+                "capability": "registration_screen"
+              }
+            }
+          ]
+        },
+        {
+          "id": "registration_screen",
+          "title": "Registration",
+          "widgets": [
+            {
+              "id": "name_field",
+              "type": "text_field",
+              "label": "Full Name",
+              "validators": [
+                {
+                  "type": "required",
+                  "message": "Name is required"
+                }
+              ]
+            },
+            {
+              "id": "email_field",
+              "type": "text_field",
+              "label": "Email",
+              "validators": [
+                {
+                  "type": "required",
+                  "message": "Email is required"
+                },
+                {
+                  "type": "email",
+                  "message": "Invalid email format"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
