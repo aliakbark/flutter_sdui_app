@@ -31,6 +31,10 @@ dependencies:
   # JSON serialization
   json_annotation: ^4.8.1
 
+  # Local package for SDUI module
+  sdui:
+    path: ./packages/sdui
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -39,8 +43,8 @@ dev_dependencies:
   bloc_test: ^10.0.0
   
   # Code generation
-  json_serializable: ^6.7.1
-  build_runner: ^2.4.7
+  json_serializable: ^6.11.1
+  build_runner: ^2.7.1
 
 flutter:
   uses-material-design: true
