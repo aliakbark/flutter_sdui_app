@@ -5,6 +5,8 @@ import 'package:flutter_sdui_app/core/shared/services/network_info.dart';
 import 'package:flutter_sdui_app/features/auth/data/datasources/auth_local_datasource.dart';
 import 'package:flutter_sdui_app/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:flutter_sdui_app/features/auth/presentation/states/authentication_cubit.dart';
+import 'package:flutter_sdui_app/features/sdui/services/otp_service.dart';
+import 'package:flutter_sdui_app/features/sdui/workflows/onboarding/onboarding_workflow_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,5 +29,10 @@ Future<void> init() async {
   // Authentication
   sl.registerSingleton<AuthenticationCubit>(
     AuthenticationCubit(AuthRepositoryImpl(AuthLocalDataSource(sl()))),
+  );
+
+  // SDUI Workflow Cubits
+  sl.registerLazySingleton<OnboardingWorkflowCubit>(
+    () => OnboardingWorkflowCubit(OtpService()),
   );
 }

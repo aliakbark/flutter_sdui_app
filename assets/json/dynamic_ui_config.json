@@ -21,7 +21,14 @@
             {
               "type": "Text",
               "props": {
-                "text": "Enter your mobile to get started."
+                "text": "Enter your mobile to get started.",
+                "style": "title"
+              }
+            },
+            {
+              "type": "Spacer",
+              "props": {
+                "height": 24
               }
             },
             {
@@ -43,6 +50,12 @@
                   "message": "Invalid number"
                 }
               ]
+            },
+            {
+              "type": "Spacer",
+              "props": {
+                "height": 32
+              }
             },
             {
               "type": "Button",
@@ -70,13 +83,23 @@
             {
               "type": "Text",
               "props": {
-                "text": "We’ve sent a code to your mobile."
+                "text": "We've sent a code to your mobile.",
+                "style": "title"
+              }
+            },
+            {
+              "type": "Spacer",
+              "props": {
+                "height": 24
               }
             },
             {
               "type": "OtpField",
               "id": "otp",
               "label": "6-digit code",
+              "props": {
+                "length": 6
+              },
               "validators": [
                 {
                   "type": "required",
@@ -91,12 +114,21 @@
               ]
             },
             {
+              "type": "Spacer",
+              "props": {
+                "height": 32
+              }
+            },
+            {
               "type": "Row",
               "children": [
                 {
                   "type": "Button",
                   "style": "secondary",
                   "label": "Resend",
+                  "props": {
+                    "fullWidth": false
+                  },
                   "action": {
                     "type": "capability.invoke",
                     "capability": "auth-otp-send-v1",
@@ -111,6 +143,9 @@
                 {
                   "type": "Button",
                   "label": "Verify",
+                  "props": {
+                    "fullWidth": false
+                  },
                   "action": {
                     "type": "capability.invoke",
                     "capability": "auth-otp-verify-v1",
