@@ -1,0 +1,56 @@
+{
+  "appTitle": "Flutter SDUI Demo App",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "welcomeMessage": "Hey there!\nWelcome to Flutter SDUI Demo App",
+  "@welcomeMessage": {
+    "description": "Welcome message on get started page"
+  },
+  "startSduiOnboarding": "Start SDUI Onboarding",
+  "@startSduiOnboarding": {
+    "description": "Button text to start SDUI onboarding flow"
+  },
+  "traditionalOnboarding": "Traditional Onboarding",
+  "@traditionalOnboarding": {
+    "description": "Button text to start traditional onboarding flow"
+  },
+  "onboardingCompleted": "Onboarding completed successfully!",
+  "@onboardingCompleted": {
+    "description": "Success message when onboarding is completed"
+  },
+  "errorMessage": "Error: {error}",
+  "@errorMessage": {
+    "description": "Generic error message with placeholder",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network connection failed"
+      }
+    }
+  },
+  "noInternetConnection": "No internet connection",
+  "@noInternetConnection": {
+    "description": "Message shown when device has no internet connection"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings page title"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language setting label"
+  },
+  "theme": "Theme",
+  "@theme": {
+    "description": "Theme setting label"
+  },
+  "english": "English",
+  "@english": {
+    "description": "English language option"
+  },
+  "arabic": "العربية",
+  "@arabic": {
+    "description": "Arabic language option"
+  }
+}

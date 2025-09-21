@@ -1,5 +1,5 @@
+import 'package:flutter_sdui_app/features/sdui/services/otp_service.dart';
 import 'package:sdui/sdui.dart';
-import '../../../services/otp_service.dart';
 
 /// Capability for sending OTP to phone number
 class OtpSendCapability implements SduiCapability {

@@ -4,6 +4,9 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 abstract class NetworkInfo {
   /// Returns true if the device is connected to the internet
   Future<bool> get isConnected;
+  
+  /// Stream of connectivity changes
+  Stream<bool> get connectivityStream;
 }
 
 /// Implementation of [NetworkInfo] using [Connectivity]
@@ -17,6 +20,14 @@ class NetworkInfoImpl implements NetworkInfo {
     final List<ConnectivityResult> result = await connectivity
         .checkConnectivity();
 
-    return result.contains(ConnectivityResult.none);
+    // Fix: should return true when NOT none (i.e., connected)
+    return !result.contains(ConnectivityResult.none);
+  }
+
+  @override
+  Stream<bool> get connectivityStream {
+    return connectivity.onConnectivityChanged.map(
+      (results) => !results.contains(ConnectivityResult.none),
+    );
   }
 }

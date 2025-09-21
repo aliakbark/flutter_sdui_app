@@ -1,12 +1,12 @@
-import 'package:sdui/sdui.dart';
 import 'package:flutter_sdui_app/core/di/injector.dart';
 import 'package:flutter_sdui_app/features/auth/presentation/states/authentication_cubit.dart';
-import '../../../services/otp_service.dart';
+import 'package:flutter_sdui_app/features/sdui/services/otp_service.dart';
+import 'package:sdui/sdui.dart';
 
 /// Capability for verifying OTP and triggering authentication
 class OtpVerifyCapability implements SduiCapability {
   final OtpService _otpService;
-  
+
   OtpVerifyCapability(this._otpService);
 
   @override
@@ -28,17 +28,19 @@ class OtpVerifyCapability implements SduiCapability {
     try {
       // Verify OTP using service
       final result = await _otpService.verifyOtp(phone, otp);
-      
+
       // Trigger authentication on successful verification
       final authCubit = sl<AuthenticationCubit>();
       await authCubit.login(phone);
-      
+
       return SduiCapabilityResult.success(
         message: 'OTP verified successfully',
         data: result,
       );
     } catch (e) {
-      return SduiCapabilityResult.error('Failed to verify OTP: ${e.toString()}');
+      return SduiCapabilityResult.error(
+        'Failed to verify OTP: ${e.toString()}',
+      );
     }
   }
 }

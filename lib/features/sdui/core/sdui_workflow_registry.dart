@@ -1,6 +1,5 @@
 import 'dart:developer' as dev;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter_sdui_app/features/sdui/workflows/onboarding/onboarding_workflow.dart';
 import 'package:sdui/sdui.dart';
 
