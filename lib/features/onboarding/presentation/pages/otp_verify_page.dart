@@ -75,112 +75,149 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Verify OTP'), centerTitle: true),
+      appBar: AppBar(
+        title: Semantics(
+          header: true,
+          child: const Text('Verify OTP'),
+        ),
+        centerTitle: true,
+      ),
       body: BlocListener<OnboardingCubit, OnboardingState>(
         listener: (context, state) {
           if (state is OtpResendSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('OTP resent successfully!'),
+              SnackBar(
+                content: Semantics(
+                  liveRegion: true,
+                  child: const Text('OTP resent successfully!'),
+                ),
                 backgroundColor: Colors.green,
               ),
             );
           } else if (state is OtpVerifySuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('OTP verified successfully! Logging you in...'),
+              SnackBar(
+                content: Semantics(
+                  liveRegion: true,
+                  child: const Text('OTP verified successfully! Logging you in...'),
+                ),
                 backgroundColor: Colors.green,
               ),
             );
           }
         },
-
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const SizedBox(height: 32),
-                const Text(
-                  'Verify Phone Number',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  'Enter the 6-digit code sent to your phone number.',
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 32),
-                // Phone number display with edit button
-                _PhoneNumberDisplay(
-                  phoneNumber: widget.phoneNumber,
-                  onEdit: _editPhoneNumber,
-                ),
-                const SizedBox(height: 32),
-                BlocSelector<OnboardingCubit, OnboardingState, bool>(
-                  selector: (state) => state is OnboardingLoading,
-                  builder: (context, isLoading) {
-                    return TextFormField(
-                      controller: _otpController,
-                      decoration: const InputDecoration(
-                        labelText: 'Enter OTP',
-                        hintText: '123456',
-                        prefixIcon: Icon(Icons.lock),
-                        border: OutlineInputBorder(),
-                        counterText: '',
-                      ),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      maxLength: 6,
-                      validator: _validateOtp,
-                      enabled: !isLoading,
+        child: Semantics(
+          label: 'OTP verification form',
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: 32),
+                  Semantics(
+                    header: true,
+                    child: const Text(
+                      'Verify Phone Number',
+                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 18, letterSpacing: 2),
-                    );
-                  },
-                ),
-                const SizedBox(height: 24),
-                // Separate timer widget to prevent unnecessary rebuilds
-                _OtpTimerWidget(formatTime: _formatOtpTime),
-                const SizedBox(height: 32),
-                BlocSelector<OnboardingCubit, OnboardingState, bool>(
-                  selector: (state) => state is OnboardingLoading,
-                  builder: (context, isLoading) {
-                    return ElevatedButton(
-                      onPressed: isLoading ? null : _verifyOtp,
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                      semanticsLabel: 'Verify Phone Number - Main heading',
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Enter the 6-digit code sent to your phone number.',
+                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                    textAlign: TextAlign.center,
+                    semanticsLabel: 'Enter the 6-digit verification code sent to your phone number.',
+                  ),
+                  const SizedBox(height: 32),
+                  // Phone number display with edit button
+                  _PhoneNumberDisplay(
+                    phoneNumber: widget.phoneNumber,
+                    onEdit: _editPhoneNumber,
+                  ),
+                  const SizedBox(height: 32),
+                  BlocSelector<OnboardingCubit, OnboardingState, bool>(
+                    selector: (state) => state is OnboardingLoading,
+                    builder: (context, isLoading) {
+                      return Semantics(
+                        textField: true,
+                        hint: 'Enter 6-digit verification code. Use 123456 for testing.',
+                        child: TextFormField(
+                          controller: _otpController,
+                          decoration: const InputDecoration(
+                            labelText: 'Enter OTP',
+                            hintText: '123456',
+                            prefixIcon: Icon(Icons.lock),
+                            border: OutlineInputBorder(),
+                            counterText: '',
+                          ),
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                          maxLength: 6,
+                          validator: _validateOtp,
+                          enabled: !isLoading,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 18, letterSpacing: 2),
+                          textInputAction: TextInputAction.done,
+                          onFieldSubmitted: (_) => !isLoading ? _verifyOtp() : null,
                         ),
-                      ),
-                      child: isLoading
-                          ? const SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  Colors.white,
-                                ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 24),
+                  // Separate timer widget to prevent unnecessary rebuilds
+                  _OtpTimerWidget(formatTime: _formatOtpTime),
+                  const SizedBox(height: 32),
+                  BlocSelector<OnboardingCubit, OnboardingState, bool>(
+                    selector: (state) => state is OnboardingLoading,
+                    builder: (context, isLoading) {
+                      return Semantics(
+                        button: true,
+                        hint: isLoading 
+                            ? 'Verifying OTP, please wait'
+                            : 'Verify the entered OTP code',
+                        child: SizedBox(
+                          height: 48,
+                          child: ElevatedButton(
+                            onPressed: isLoading ? null : _verifyOtp,
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                            )
-                          : const Text(
-                              'Verify OTP',
-                              style: TextStyle(fontSize: 16),
                             ),
-                    );
-                  },
-                ),
-                const SizedBox(height: 16),
-                _ResendOtpButton(onResend: _resendOtp),
-                const SizedBox(height: 32),
-                const _MockApiInfoCard(),
-              ],
+                            child: isLoading
+                                ? Semantics(
+                                    label: 'Verifying OTP',
+                                    child: const SizedBox(
+                                      height: 20,
+                                      width: 20,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                        valueColor: AlwaysStoppedAnimation<Color>(
+                                          Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : const Text(
+                                    'Verify OTP',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  _ResendOtpButton(onResend: _resendOtp),
+                  const SizedBox(height: 32),
+                  const _MockApiInfoCard(),
+                ],
+              ),
             ),
           ),
         ),
@@ -206,29 +243,42 @@ class _PhoneNumberDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.grey[100],
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.grey[300]!),
-      ),
-      child: Row(
-        children: [
-          const Icon(Icons.phone, color: Colors.grey),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              _formatPhoneNumber(phoneNumber),
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+    return Semantics(
+      label: 'Phone number display with edit option',
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.grey[100],
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.grey[300]!),
+        ),
+        child: Row(
+          children: [
+            Semantics(
+              label: 'Phone icon',
+              child: const Icon(Icons.phone, color: Colors.grey),
             ),
-          ),
-          IconButton(
-            onPressed: onEdit,
-            icon: const Icon(Icons.edit, color: Colors.blue),
-            tooltip: 'Edit phone number',
-          ),
-        ],
+            const SizedBox(width: 12),
+            Expanded(
+              child: Semantics(
+                label: 'Phone number: ${_formatPhoneNumber(phoneNumber)}',
+                child: Text(
+                  _formatPhoneNumber(phoneNumber),
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+              ),
+            ),
+            Semantics(
+              button: true,
+              hint: 'Edit phone number and go back to previous screen',
+              child: IconButton(
+                onPressed: onEdit,
+                icon: const Icon(Icons.edit, color: Colors.blue),
+                tooltip: 'Edit phone number',
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -248,16 +298,24 @@ class _OtpTimerWidget extends StatelessWidget {
       valueListenable: cubit.remainingSecondsNotifier,
       builder: (context, remainingSeconds, child) {
         if (remainingSeconds > 0) {
-          return Text(
-            'Resend OTP in ${formatTime(remainingSeconds)}',
-            style: const TextStyle(fontSize: 14, color: Colors.grey),
-            textAlign: TextAlign.center,
+          return Semantics(
+            liveRegion: true,
+            label: 'OTP timer: Resend available in ${formatTime(remainingSeconds)}',
+            child: Text(
+              'Resend OTP in ${formatTime(remainingSeconds)}',
+              style: const TextStyle(fontSize: 14, color: Colors.grey),
+              textAlign: TextAlign.center,
+            ),
           );
         }
-        return const Text(
-          'You can now resend the OTP',
-          style: TextStyle(fontSize: 14, color: Colors.green),
-          textAlign: TextAlign.center,
+        return Semantics(
+          liveRegion: true,
+          label: 'OTP timer expired, you can now resend the OTP',
+          child: const Text(
+            'You can now resend the OTP',
+            style: TextStyle(fontSize: 14, color: Colors.green),
+            textAlign: TextAlign.center,
+          ),
         );
       },
     );
@@ -280,15 +338,24 @@ class _ResendOtpButton extends StatelessWidget {
         return BlocSelector<OnboardingCubit, OnboardingState, bool>(
           selector: (state) => state is OnboardingLoading,
           builder: (context, isLoading) {
-            return OutlinedButton(
-              onPressed: (isLoading || !canResend) ? null : onResend,
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+            return Semantics(
+              button: true,
+              hint: (isLoading || !canResend) 
+                  ? 'Resend OTP button is currently disabled'
+                  : 'Resend verification code to your phone number',
+              child: SizedBox(
+                height: 48,
+                child: OutlinedButton(
+                  onPressed: (isLoading || !canResend) ? null : onResend,
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text('Resend OTP', style: TextStyle(fontSize: 16)),
                 ),
               ),
-              child: const Text('Resend OTP', style: TextStyle(fontSize: 16)),
             );
           },
         );
@@ -303,21 +370,25 @@ class _MockApiInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Card(
-      child: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Mock API Behavior:',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 8),
-            Text('• Use OTP "123456" for successful verification'),
-            Text('• Any other OTP will result in an error'),
-            Text('• Successful verification will log you in automatically'),
-          ],
+    return Semantics(
+      label: 'Development information about mock API behavior',
+      child: const Card(
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Mock API Behavior:',
+                style: TextStyle(fontWeight: FontWeight.bold),
+                semanticsLabel: 'Mock API Behavior information',
+              ),
+              SizedBox(height: 8),
+              Text('• Use OTP "123456" for successful verification'),
+              Text('• Any other OTP will result in an error'),
+              Text('• Successful verification will log you in automatically'),
+            ],
+          ),
         ),
       ),
     );

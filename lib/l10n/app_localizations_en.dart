@@ -18,7 +18,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get startSduiOnboarding => 'Start SDUI Onboarding';
 
   @override
-  String get traditionalOnboarding => 'Traditional Onboarding';
+  String get normalOnboarding => 'Normal Onboarding';
 
   @override
   String get onboardingCompleted => 'Onboarding completed successfully!';

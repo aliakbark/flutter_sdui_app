@@ -78,6 +78,8 @@ class _SduiTextFieldState extends State<SduiTextField> {
     final keyboard = properties['keyboard'] as String?;
     final maxLength = properties['maxLength'] as int?;
     final obscureText = properties['obscureText'] as bool? ?? false;
+    final semanticLabel = properties['semanticLabel'] as String?;
+    final semanticHint = properties['semanticHint'] as String?;
 
     return ListenableBuilder(
       listenable: widget.controller,
@@ -87,72 +89,81 @@ class _SduiTextFieldState extends State<SduiTextField> {
             ? widget.controller.getFieldError(fieldId)
             : null;
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (widget.config.label != null) ...[
-              Text(
-                widget.config.label!,
+        return Semantics(
+          textField: true,
+          label: semanticLabel ?? widget.config.label,
+          hint: semanticHint ?? hint ?? 'Enter ${widget.config.label?.toLowerCase() ?? 'text'}',
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (widget.config.label != null) ...[
+                Semantics(
+                  label: '${widget.config.label} field label',
+                  child: Text(
+                    widget.config.label!,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: widget.themeTokens.getTextColor(),
+                      fontFamily: widget.themeTokens.getFontFamily(),
+                    ),
+                  ),
+                ),
+                SizedBox(height: widget.themeTokens.getSpaceSm()),
+              ],
+              TextField(
+                controller: _textController,
+                focusNode: _focusNode,
+                keyboardType: _getKeyboardType(keyboard),
+                inputFormatters: _getInputFormatters(keyboard, maxLength),
+                obscureText: obscureText,
+                maxLength: maxLength,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                  hintText: hint,
+                  errorText: errorText,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      widget.themeTokens.getRadiusMd(),
+                    ),
+                    borderSide: BorderSide(color: Colors.grey[300]!),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      widget.themeTokens.getRadiusMd(),
+                    ),
+                    borderSide: BorderSide(color: Colors.grey[300]!),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      widget.themeTokens.getRadiusMd(),
+                    ),
+                    borderSide: BorderSide(
+                      color: widget.themeTokens.getPrimaryColor(),
+                    ),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      widget.themeTokens.getRadiusMd(),
+                    ),
+                    borderSide: const BorderSide(color: Colors.red),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      widget.themeTokens.getRadiusMd(),
+                    ),
+                    borderSide: const BorderSide(color: Colors.red),
+                  ),
+                  contentPadding: EdgeInsets.all(widget.themeTokens.getSpaceMd()),
+                  counterText: '', // Hide character counter
+                ),
                 style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
                   color: widget.themeTokens.getTextColor(),
                   fontFamily: widget.themeTokens.getFontFamily(),
                 ),
               ),
-              SizedBox(height: widget.themeTokens.getSpaceSm()),
             ],
-            TextField(
-              controller: _textController,
-              focusNode: _focusNode,
-              keyboardType: _getKeyboardType(keyboard),
-              inputFormatters: _getInputFormatters(keyboard, maxLength),
-              obscureText: obscureText,
-              maxLength: maxLength,
-              decoration: InputDecoration(
-                hintText: hint,
-                errorText: errorText,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                    widget.themeTokens.getRadiusMd(),
-                  ),
-                  borderSide: BorderSide(color: Colors.grey[300]!),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                    widget.themeTokens.getRadiusMd(),
-                  ),
-                  borderSide: BorderSide(color: Colors.grey[300]!),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                    widget.themeTokens.getRadiusMd(),
-                  ),
-                  borderSide: BorderSide(
-                    color: widget.themeTokens.getPrimaryColor(),
-                  ),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                    widget.themeTokens.getRadiusMd(),
-                  ),
-                  borderSide: const BorderSide(color: Colors.red),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                    widget.themeTokens.getRadiusMd(),
-                  ),
-                  borderSide: const BorderSide(color: Colors.red),
-                ),
-                contentPadding: EdgeInsets.all(widget.themeTokens.getSpaceMd()),
-                counterText: '', // Hide character counter
-              ),
-              style: TextStyle(
-                color: widget.themeTokens.getTextColor(),
-                fontFamily: widget.themeTokens.getFontFamily(),
-              ),
-            ),
-          ],
+          ),
         );
       },
     );

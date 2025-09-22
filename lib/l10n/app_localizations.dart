@@ -116,11 +116,11 @@ abstract class AppLocalizations {
   /// **'Start SDUI Onboarding'**
   String get startSduiOnboarding;
 
-  /// Button text to start traditional onboarding flow
+  /// Button text to start normal onboarding flow
   ///
   /// In en, this message translates to:
-  /// **'Traditional Onboarding'**
-  String get traditionalOnboarding;
+  /// **'Normal Onboarding'**
+  String get normalOnboarding;
 
   /// Success message when onboarding is completed
   ///

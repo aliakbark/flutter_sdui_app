@@ -22,16 +22,31 @@ class SduiButton extends StatelessWidget {
     final label = config.label ?? properties['label'] as String? ?? 'Button';
     final style = config.style ?? properties['style'] as String?;
     final fullWidth = properties['fullWidth'] as bool? ?? true;
+    final semanticLabel = properties['semanticLabel'] as String?;
+    final semanticHint = properties['semanticHint'] as String?;
 
     return ListenableBuilder(
       listenable: controller,
       builder: (context, child) {
         final isLoading = controller.isLoading;
 
-        Widget button = _buildButton(context, label, style, isLoading);
+        Widget button = Semantics(
+          button: true,
+          label: semanticLabel ?? label,
+          hint:
+              semanticHint ??
+              (isLoading
+                  ? 'Button is loading, please wait'
+                  : 'Tap to ${label.toLowerCase()}'),
+          child: _buildButton(context, label, style, isLoading),
+        );
 
         if (fullWidth) {
-          button = SizedBox(width: double.infinity, child: button);
+          button = SizedBox(
+            width: double.infinity,
+            height: 48, // Ensure minimum touch target size
+            child: button,
+          );
         }
 
         return button;

@@ -18,11 +18,18 @@ class SduiText extends StatelessWidget {
     final text = properties['text'] as String? ?? '';
     final style = properties['style'] as String?;
     final align = properties['align'] as String?;
+    final semanticLabel = properties['semanticLabel'] as String?;
+    final isHeader = properties['isHeader'] as bool? ?? false;
 
-    return Text(
-      text,
-      style: _getTextStyle(context, style),
-      textAlign: _getTextAlign(align),
+    return Semantics(
+      label: semanticLabel ?? text,
+      header: isHeader || style?.toLowerCase() == 'headline' || style?.toLowerCase() == 'title',
+      child: Text(
+        text,
+        style: _getTextStyle(context, style),
+        textAlign: _getTextAlign(align),
+        semanticsLabel: semanticLabel,
+      ),
     );
   }
 

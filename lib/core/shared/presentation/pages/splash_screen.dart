@@ -5,21 +5,28 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircularProgressIndicator(),
-            SizedBox(height: 24),
-            Text(
-              'Loading...',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
+        child: Semantics(
+          label: 'Application loading screen',
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Semantics(
+                label: 'Loading application, please wait',
+                child: const CircularProgressIndicator(),
               ),
-            ),
-          ],
+              const SizedBox(height: 24),
+              const Text(
+                'Loading...',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+                semanticsLabel: 'Application is loading, please wait',
+              ),
+            ],
+          ),
         ),
       ),
     );

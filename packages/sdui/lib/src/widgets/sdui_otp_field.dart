@@ -105,6 +105,10 @@ class _SduiOtpFieldState extends State<SduiOtpField> {
 
   @override
   Widget build(BuildContext context) {
+    final properties = widget.config.properties ?? <String, dynamic>{};
+    final semanticLabel = properties['semanticLabel'] as String?;
+    final semanticHint = properties['semanticHint'] as String?;
+
     return ListenableBuilder(
       listenable: widget.controller,
       builder: (context, child) {
@@ -113,36 +117,50 @@ class _SduiOtpFieldState extends State<SduiOtpField> {
             ? widget.controller.getFieldError(fieldId)
             : null;
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (widget.config.label != null) ...[
-              Text(
-                widget.config.label!,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: widget.themeTokens.getTextColor(),
-                  fontFamily: widget.themeTokens.getFontFamily(),
+        return Semantics(
+          label: semanticLabel ?? widget.config.label ?? 'OTP input field',
+          hint: semanticHint ?? 'Enter $_length digit verification code',
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (widget.config.label != null) ...[
+                Semantics(
+                  label: '${widget.config.label} field label',
+                  child: Text(
+                    widget.config.label!,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: widget.themeTokens.getTextColor(),
+                      fontFamily: widget.themeTokens.getFontFamily(),
+                    ),
+                  ),
+                ),
+                SizedBox(height: widget.themeTokens.getSpaceSm()),
+              ],
+              Semantics(
+                label: 'OTP input boxes',
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: List.generate(
+                    _length,
+                    (index) => _buildOtpBox(index, errorText != null),
+                  ),
                 ),
               ),
-              SizedBox(height: widget.themeTokens.getSpaceSm()),
+              if (errorText != null) ...[
+                SizedBox(height: widget.themeTokens.getSpaceSm()),
+                Semantics(
+                  liveRegion: true,
+                  label: 'Error: $errorText',
+                  child: Text(
+                    errorText,
+                    style: const TextStyle(color: Colors.red, fontSize: 12),
+                  ),
+                ),
+              ],
             ],
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: List.generate(
-                _length,
-                (index) => _buildOtpBox(index, errorText != null),
-              ),
-            ),
-            if (errorText != null) ...[
-              SizedBox(height: widget.themeTokens.getSpaceSm()),
-              Text(
-                errorText,
-                style: const TextStyle(color: Colors.red, fontSize: 12),
-              ),
-            ],
-          ],
+          ),
         );
       },
     );
@@ -192,7 +210,6 @@ class _SduiOtpFieldState extends State<SduiOtpField> {
           }
         },
       ),
-      1,
     );
   }
 

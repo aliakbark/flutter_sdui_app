@@ -19,7 +19,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get startSduiOnboarding => 'بدء عملية الإعداد SDUI';
 
   @override
-  String get traditionalOnboarding => 'عملية الإعداد التقليدية';
+  String get normalOnboarding => 'عملية الإعداد العادية';
 
   @override
   String get onboardingCompleted => 'تم إكمال عملية الإعداد بنجاح!';

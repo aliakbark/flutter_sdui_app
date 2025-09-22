@@ -16,62 +16,91 @@ class GetStartedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.appTitle),
+        title: Semantics(
+          header: true,
+          child: Text(AppLocalizations.of(context)!.appTitle),
+        ),
         actions: const [LanguageSwitcher()],
       ),
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Expanded(
-              child: Center(
-                child: Text(
-                  AppLocalizations.of(context)!.welcomeMessage,
-                  style: Theme.of(context).textTheme.titleLarge,
-                  textAlign: TextAlign.center,
+        child: Semantics(
+          label: 'Welcome screen with onboarding options',
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Expanded(
+                child: Center(
+                  child: Semantics(
+                    header: true,
+                    child: Text(
+                      AppLocalizations.of(context)!.welcomeMessage,
+                      style: Theme.of(context).textTheme.titleLarge,
+                      textAlign: TextAlign.center,
+                      semanticsLabel:
+                          'Welcome to the application. Choose an onboarding option below.',
+                    ),
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      // Launch SDUI workflow
-                      SduiService.navigateToWorkflow(
-                        context,
-                        OnboardingWorkflow.id,
-                      );
-                    },
-                    child: Text(
-                      AppLocalizations.of(context)!.startSduiOnboarding,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  OutlinedButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => BlocProvider(
-                            create: (context) => OnboardingCubit(
-                              OnboardingRepositoryImpl(
-                                OnboardingRemoteDataSource(),
-                              ),
-                            ),
-                            child: const OtpSendPage(),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Semantics(
+                      button: true,
+                      hint:
+                          'Start server-driven user interface onboarding process',
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: 48,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            // Launch SDUI workflow
+                            SduiService.navigateToWorkflow(
+                              context,
+                              OnboardingWorkflow.id,
+                            );
+                          },
+                          child: Text(
+                            AppLocalizations.of(context)!.startSduiOnboarding,
                           ),
                         ),
-                      );
-                    },
-                    child: Text(
-                      AppLocalizations.of(context)!.traditionalOnboarding,
+                      ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 16),
+                    Semantics(
+                      button: true,
+                      hint:
+                          'Start traditional onboarding process with phone verification',
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: 48,
+                        child: OutlinedButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => BlocProvider(
+                                  create: (context) => OnboardingCubit(
+                                    OnboardingRepositoryImpl(
+                                      OnboardingRemoteDataSource(),
+                                    ),
+                                  ),
+                                  child: const OtpSendPage(),
+                                ),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            AppLocalizations.of(context)!.normalOnboarding,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -11,9 +11,9 @@
   "@startSduiOnboarding": {
     "description": "Button text to start SDUI onboarding flow"
   },
-  "traditionalOnboarding": "Traditional Onboarding",
-  "@traditionalOnboarding": {
-    "description": "Button text to start traditional onboarding flow"
+  "normalOnboarding": "Normal Onboarding",
+  "@normalOnboarding": {
+    "description": "Button text to start normal onboarding flow"
   },
   "onboardingCompleted": "Onboarding completed successfully!",
   "@onboardingCompleted": {
