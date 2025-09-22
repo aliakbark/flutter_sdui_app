@@ -5,7 +5,7 @@ import 'package:flutter_sdui_app/core/shared/services/language_service.dart';
 void main() {
   group('LanguageService', () {
     test('has correct supported languages', () {
-      expect(LanguageService.supportedLanguages.length, equals(2));
+      expect(LanguageService.supportedLanguages.length, equals(4));
       expect(LanguageService.defaultLanguage.languageCode, equals('en'));
     });
 

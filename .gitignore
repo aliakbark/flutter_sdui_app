@@ -124,3 +124,6 @@ app.*.symbols
 *.ipr
 *.iws
 .idea/*
+
+# Generated localization files
+lib/l10n/generated/

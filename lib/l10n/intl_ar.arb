@@ -1,0 +1,82 @@
+{
+  "@@locale": "ar",
+  "@@context": "Flutter SDUI Demo App - Base Arabic translations",
+  "appTitle": "تطبيق Flutter SDUI التجريبي",
+  "@appTitle": {
+    "description": "العنوان الرئيسي للتطبيق المعروض في أشرطة التطبيق وشاشات البداية",
+    "context": "App branding",
+    "maxLength": 30
+  },
+  "welcomeMessage": "أهلاً وسهلاً!\nمرحباً بك في تطبيق Flutter SDUI التجريبي",
+  "@welcomeMessage": {
+    "description": "رسالة الترحيب المعروضة في صفحة البداية لتحية المستخدمين الجدد",
+    "context": "Onboarding - Welcome screen",
+    "maxLength": 100
+  },
+  "startSduiOnboarding": "بدء الإعداد التفاعلي",
+  "@startSduiOnboarding": {
+    "description": "نص الزر لبدء عملية الإعداد التفاعلي المدفوع من الخادم",
+    "context": "Onboarding - Button action",
+    "maxLength": 25
+  },
+  "normalOnboarding": "الإعداد التقليدي",
+  "@normalOnboarding": {
+    "description": "نص الزر لبدء عملية الإعداد التقليدية الثابتة",
+    "context": "Onboarding - Button action",
+    "maxLength": 25
+  },
+  "onboardingCompleted": "تم إكمال الإعداد بنجاح!",
+  "@onboardingCompleted": {
+    "description": "رسالة النجاح المعروضة عند إكمال المستخدم لعملية الإعداد",
+    "context": "Onboarding - Success feedback",
+    "maxLength": 50
+  },
+  "errorMessage": "خطأ: {error}",
+  "@errorMessage": {
+    "description": "قالب رسالة خطأ عامة مع تفاصيل الخطأ الديناميكية",
+    "context": "Error handling - Generic errors",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "فشل في الاتصال بالشبكة",
+        "description": "رسالة الخطأ المحددة أو الرمز"
+      }
+    }
+  },
+  "noInternetConnection": "لا يوجد اتصال بالإنترنت",
+  "@noInternetConnection": {
+    "description": "الرسالة المعروضة عندما لا يكون للجهاز اتصال بالإنترنت",
+    "context": "Error handling - Network errors",
+    "maxLength": 30
+  },
+  "settings": "الإعدادات",
+  "@settings": {
+    "description": "عنوان صفحة الإعدادات/التفضيلات",
+    "context": "Navigation - Settings page",
+    "maxLength": 15
+  },
+  "language": "اللغة",
+  "@language": {
+    "description": "تسمية إعداد اختيار اللغة",
+    "context": "Settings - Language preference",
+    "maxLength": 15
+  },
+  "theme": "المظهر",
+  "@theme": {
+    "description": "تسمية إعداد المظهر/الشكل (الوضع الفاتح/الداكن)",
+    "context": "Settings - Theme preference",
+    "maxLength": 15
+  },
+  "english": "English",
+  "@english": {
+    "description": "اسم العرض لخيار اللغة الإنجليزية في محدد اللغة",
+    "context": "Settings - Language options",
+    "maxLength": 20
+  },
+  "arabic": "العربية",
+  "@arabic": {
+    "description": "اسم العرض لخيار اللغة العربية في محدد اللغة",
+    "context": "Settings - Language options",
+    "maxLength": 20
+  }
+}
