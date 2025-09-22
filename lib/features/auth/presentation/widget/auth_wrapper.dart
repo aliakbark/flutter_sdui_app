@@ -45,33 +45,57 @@ class AuthWrapper extends StatelessWidget {
       return;
     }
 
-    try {
-      ScaffoldMessenger.of(context).clearSnackBars();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Check if the widget is still mounted and context is valid
+      if (!context.mounted) {
+        dev.log(
+          'Skipping error snackbar - widget no longer mounted',
+          name: 'AuthWrapper',
+        );
+        return;
+      }
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            state.message!,
-            style: TextStyle(color: Theme.of(context).colorScheme.onError),
+      try {
+        // Additional check to ensure we have a valid Scaffold ancestor
+        final ScaffoldMessengerState? scaffoldMessenger =
+            ScaffoldMessenger.maybeOf(context);
+        if (scaffoldMessenger == null) {
+          dev.log(
+            'No ScaffoldMessenger found in widget tree',
+            name: 'AuthWrapper',
+          );
+          return;
+        }
+
+        scaffoldMessenger.clearSnackBars();
+
+        scaffoldMessenger.showSnackBar(
+          SnackBar(
+            content: Text(
+              state.message!,
+              style: TextStyle(color: Theme.of(context).colorScheme.onError),
+            ),
+            backgroundColor: Theme.of(context).colorScheme.error,
+            behavior: SnackBarBehavior.floating,
+            duration: const Duration(seconds: 4),
+            action: SnackBarAction(
+              label: 'Dismiss',
+              textColor: Theme.of(context).colorScheme.onError,
+              onPressed: () {
+                if (context.mounted) {
+                  ScaffoldMessenger.maybeOf(context)?.hideCurrentSnackBar();
+                }
+              },
+            ),
           ),
-          backgroundColor: Theme.of(context).colorScheme.error,
-          behavior: SnackBarBehavior.floating,
-          duration: const Duration(seconds: 4),
-          action: SnackBarAction(
-            label: 'Dismiss',
-            textColor: Theme.of(context).colorScheme.onError,
-            onPressed: () {
-              ScaffoldMessenger.of(context).hideCurrentSnackBar();
-            },
-          ),
-        ),
-      );
-    } catch (e) {
-      dev.log(
-        'Error showing auth error snackbar: $e',
-        name: 'AuthWrapper',
-        error: e,
-      );
-    }
+        );
+      } catch (e) {
+        dev.log(
+          'Error showing auth error snackbar: $e',
+          name: 'AuthWrapper',
+          error: e,
+        );
+      }
+    });
   }
 }

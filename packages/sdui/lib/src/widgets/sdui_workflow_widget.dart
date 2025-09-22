@@ -1,8 +1,10 @@
+import 'dart:developer' as dev;
+
 import 'package:flutter/material.dart';
-import 'package:sdui/src/models/workflow.dart';
-import 'package:sdui/src/models/theme_tokens.dart';
-import 'package:sdui/src/core/workflow_controller.dart';
 import 'package:sdui/src/core/sdui_renderer.dart';
+import 'package:sdui/src/core/workflow_controller.dart';
+import 'package:sdui/src/models/theme_tokens.dart';
+import 'package:sdui/src/models/workflow.dart';
 
 class SduiWorkflowWidget extends StatefulWidget {
   final Workflow workflow;
@@ -44,16 +46,37 @@ class _SduiWorkflowWidgetState extends State<SduiWorkflowWidget> {
   void _handleError(String error) {
     widget.onError?.call(error);
 
-    // Show error snackbar
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(error),
-          backgroundColor: Colors.red,
-          duration: const Duration(seconds: 3),
-        ),
-      );
-    }
+    // Show error snackbar with proper context validation
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+
+      try {
+        final scaffoldMessenger = ScaffoldMessenger.maybeOf(context);
+        if (scaffoldMessenger == null) return;
+
+        scaffoldMessenger.clearSnackBars();
+        scaffoldMessenger.showSnackBar(
+          SnackBar(
+            content: Text(error),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 3),
+            behavior: SnackBarBehavior.floating,
+            action: SnackBarAction(
+              label: 'Dismiss',
+              textColor: Colors.white,
+              onPressed: () {
+                if (mounted) {
+                  ScaffoldMessenger.maybeOf(context)?.hideCurrentSnackBar();
+                }
+              },
+            ),
+          ),
+        );
+      } catch (e) {
+        // Log error but don't throw to prevent cascading errors
+        dev.log('Error showing snackbar: $e', name: 'SduiWorkflowWidget');
+      }
+    });
   }
 
   @override

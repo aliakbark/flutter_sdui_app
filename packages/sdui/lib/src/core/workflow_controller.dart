@@ -164,7 +164,7 @@ class SduiWorkflowController extends ChangeNotifier {
     if (action.capability != null) {
       navigateToScreen(action.capability!);
     }
-    
+
     // Also handle success result if provided
     _handleActionSuccess(action.onSuccess, null);
   }
@@ -198,7 +198,10 @@ class SduiWorkflowController extends ChangeNotifier {
 
   /// Handle action error
   void _handleActionError(String errorMessage, ActionResult? errorResult) {
-    onError?.call(errorMessage);
+    // Use addPostFrameCallback to prevent widget lifecycle issues
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      onError?.call(errorMessage);
+    });
 
     if (errorResult?.showToast != null) {
       // Handle error toast

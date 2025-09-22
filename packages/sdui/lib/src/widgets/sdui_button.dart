@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../models/widget_config.dart';
-import '../models/theme_tokens.dart';
+
 import '../core/workflow_controller.dart';
+import '../models/theme_tokens.dart';
+import '../models/widget_config.dart';
 
 class SduiButton extends StatelessWidget {
   final WidgetConfig config;
@@ -9,15 +10,15 @@ class SduiButton extends StatelessWidget {
   final SduiWorkflowController controller;
 
   const SduiButton({
-    Key? key,
+    super.key,
     required this.config,
     required this.themeTokens,
     required this.controller,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    final properties = config.properties as Map<String, dynamic>? ?? {};
+    final properties = config.properties ?? <String, dynamic>{};
     final label = config.label ?? properties['label'] as String? ?? 'Button';
     final style = config.style ?? properties['style'] as String?;
     final fullWidth = properties['fullWidth'] as bool? ?? true;
@@ -30,10 +31,7 @@ class SduiButton extends StatelessWidget {
         Widget button = _buildButton(context, label, style, isLoading);
 
         if (fullWidth) {
-          button = SizedBox(
-            width: double.infinity,
-            child: button,
-          );
+          button = SizedBox(width: double.infinity, child: button);
         }
 
         return button;
@@ -41,7 +39,12 @@ class SduiButton extends StatelessWidget {
     );
   }
 
-  Widget _buildButton(BuildContext context, String label, String? style, bool isLoading) {
+  Widget _buildButton(
+    BuildContext context,
+    String label,
+    String? style,
+    bool isLoading,
+  ) {
     final onPressed = isLoading ? null : () => _handleButtonPress(context);
 
     switch (style?.toLowerCase()) {
@@ -107,7 +110,8 @@ class SduiButton extends StatelessWidget {
             child: CircularProgressIndicator(
               strokeWidth: 2,
               valueColor: AlwaysStoppedAnimation<Color>(
-                config.style?.toLowerCase() == 'secondary' || config.style?.toLowerCase() == 'text'
+                config.style?.toLowerCase() == 'secondary' ||
+                        config.style?.toLowerCase() == 'text'
                     ? themeTokens.getPrimaryColor()
                     : Colors.white,
               ),
@@ -144,19 +148,7 @@ class SduiButton extends StatelessWidget {
       return;
     }
 
-    try {
-      await controller.executeAction(config.action!);
-    } catch (e) {
-      // Error handling is done in the controller
-      // Could show a snackbar here if needed
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Error: ${e.toString()}'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    }
+    // Execute action - error handling is done in the controller
+    await controller.executeAction(config.action!);
   }
 }

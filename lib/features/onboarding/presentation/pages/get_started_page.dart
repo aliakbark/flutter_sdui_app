@@ -42,32 +42,6 @@ class GetStartedPage extends StatelessWidget {
                       SduiService.navigateToWorkflow(
                         context,
                         OnboardingWorkflow.id,
-                        onComplete: () {
-                          // Handle workflow completion
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                AppLocalizations.of(
-                                  context,
-                                )!.onboardingCompleted,
-                              ),
-                              backgroundColor: Colors.green,
-                            ),
-                          );
-                        },
-                        onError: (error) {
-                          // Handle workflow error
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                AppLocalizations.of(
-                                  context,
-                                )!.errorMessage(error.toString()),
-                              ),
-                              backgroundColor: Colors.red,
-                            ),
-                          );
-                        },
                       );
                     },
                     child: Text(
