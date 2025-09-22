@@ -186,9 +186,13 @@ class _SduiOtpFieldState extends State<SduiOtpField> {
           if (value.length > 1) {
             // Handle paste operation
             _handlePaste(value, index);
+          } else {
+            // Handle single character input - trigger auto-focus
+            _onTextChanged(index);
           }
         },
       ),
+      1,
     );
   }
 
