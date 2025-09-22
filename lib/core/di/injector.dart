@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sdui_app/core/network/api_client.dart';
 import 'package:flutter_sdui_app/core/shared/services/network_info.dart';
 import 'package:flutter_sdui_app/core/shared/services/preferences_service.dart';
+import 'package:flutter_sdui_app/core/shared/services/telemetry_service.dart';
 import 'package:flutter_sdui_app/core/shared/states/app/app_cubit.dart';
 import 'package:flutter_sdui_app/features/auth/data/datasources/auth_local_datasource.dart';
 import 'package:flutter_sdui_app/features/auth/data/repositories/auth_repository_impl.dart';
@@ -28,6 +29,7 @@ Future<void> init() async {
 
   // Shared services
   sl.registerLazySingleton<PreferencesService>(() => PreferencesService(sl()));
+  sl.registerLazySingleton<AnalyticsService>(() => AnalyticsService());
 
   // App-level state management
   sl.registerSingleton<AppCubit>(AppCubit(sl(), sl()));
