@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:sdui/src/capabilities/capabilities.dart';
 import 'package:sdui/src/exceptions/sdui_exceptions.dart';
@@ -198,8 +200,9 @@ class SduiWorkflowController extends ChangeNotifier {
 
   /// Handle action error
   void _handleActionError(String errorMessage, ActionResult? errorResult) {
-    // Use addPostFrameCallback to prevent widget lifecycle issues
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    // Use scheduleMicrotask to ensure callback is executed asynchronously
+    // This works reliably in both test and production environments
+    scheduleMicrotask(() {
       onError?.call(errorMessage);
     });
 

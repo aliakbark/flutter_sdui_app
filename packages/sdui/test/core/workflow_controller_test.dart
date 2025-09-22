@@ -1,3 +1,4 @@
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sdui/src/capabilities/capabilities.dart';
 import 'package:sdui/src/core/workflow_controller.dart';
@@ -9,6 +10,8 @@ import 'package:sdui/src/models/workflow.dart';
 import '../helpers/mock_data.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   group('SduiWorkflowController', () {
     late SduiWorkflowController controller;
     late Workflow workflow;
@@ -16,6 +19,7 @@ void main() {
     setUp(() {
       SduiCapabilityRegistry.clear();
       workflow = MockData.mockWorkflow;
+
       controller = SduiWorkflowController(workflow: workflow);
     });
 
@@ -205,6 +209,9 @@ void main() {
         );
 
         await controllerWithError.executeAction(action);
+        
+        // Wait for the microtask to complete
+        await Future.delayed(Duration.zero);
 
         expect(errorMessage, isNotNull);
         expect(controllerWithError.isLoading, isFalse);
@@ -255,6 +262,9 @@ void main() {
         );
 
         await controllerWithError.executeAction(action);
+        
+        // Wait for the microtask to complete
+        await Future.delayed(Duration.zero);
 
         expect(errorMessage, contains('Unknown action type'));
 
