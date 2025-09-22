@@ -6,8 +6,8 @@ publish_to: 'none' # The default setting to prevent accidental publishing.
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.9.2 <4.0.0'
-  flutter: '>=3.35.4'
+  sdk: '>=3.9.0 <4.0.0'
+  flutter: '>=3.35.0'
 
 dependencies:
   flutter:
@@ -46,7 +46,7 @@ dev_dependencies:
 
   flutter_lints: ^6.0.0
   bloc_test: ^10.0.0
-  mocktail: ^1.0.0
+  mocktail: ^1.0.4
   
   # Code generation
   json_serializable: ^6.11.1

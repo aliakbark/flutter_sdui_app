@@ -4,7 +4,7 @@ version: 0.0.1
 homepage:
 
 environment:
-  sdk: ^3.9.2
+  sdk: ">=3.9.0 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
@@ -28,4 +28,3 @@ dev_dependencies:
 flutter:
   assets:
     - assets/json/
-    - assets/config/

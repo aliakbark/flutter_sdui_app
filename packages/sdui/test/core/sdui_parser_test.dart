@@ -45,7 +45,7 @@ void main() {
 
     group('Asset Loading', () {
       test('should load configuration from asset path', () async {
-        const assetPath = 'assets/config/sdui_config.json';
+        const assetPath = 'assets/json/dynamic_ui_config.json';
 
         final config = await SduiParser.loadFromAsset(assetPath);
 

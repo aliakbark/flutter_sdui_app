@@ -1,1 +1,41 @@
-{}
+{
+  "app_version_min": "1.0.0",
+  "theme_tokens": {
+    "color.primary": "#007AFF",
+    "color.bg": "#FFFFFF",
+    "color.text": "#000000",
+    "radius.md": 8.0,
+    "space.sm": 8.0,
+    "space.md": 16.0,
+    "font.family": "SF Pro Display"
+  },
+  "workflows": [
+    {
+      "id": "demo_workflow",
+      "start_screen": "hello_screen",
+      "screens": [
+        {
+          "id": "hello_screen",
+          "title": "Demo",
+          "widgets": [
+            {
+              "id": "welcome_title",
+              "type": "text",
+              "label": "Hello SDUI"
+            },
+            {
+              "id": "description_text",
+              "type": "text",
+              "label": "This is a simple demo screen"
+            },
+            {
+              "id": "get_started_button",
+              "type": "button",
+              "label": "Get Started"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
