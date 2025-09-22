@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sdui_app/core/shared/states/app/app_cubit.dart';
-import 'package:flutter_sdui_app/l10n/app_localizations.dart';
+import 'package:flutter_sdui_app/l10n/generated/app_localizations.dart';
 
 /// Widget that wraps content with a network status banner
 class NetworkBannerWrapper extends StatelessWidget {
@@ -32,7 +32,9 @@ class NetworkBannerWrapper extends StatelessWidget {
                     opacity: showBanner ? 1.0 : 0.0,
                     child: Semantics(
                       liveRegion: true,
-                      label: showBanner ? 'No internet connection available' : '',
+                      label: showBanner
+                          ? 'No internet connection available'
+                          : '',
                       child: Container(
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(
@@ -55,7 +57,9 @@ class NetworkBannerWrapper extends StatelessWidget {
                             Semantics(
                               label: 'Network status message',
                               child: Text(
-                                AppLocalizations.of(context)!.noInternetConnection,
+                                AppLocalizations.of(
+                                  context,
+                                )!.noInternetConnection,
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,

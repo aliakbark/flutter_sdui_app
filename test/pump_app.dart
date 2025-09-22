@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_sdui_app/core/shared/services/language_service.dart';
 import 'package:flutter_sdui_app/core/shared/states/app/app_cubit.dart';
-import 'package:flutter_sdui_app/l10n/app_localizations.dart';
+import 'package:flutter_sdui_app/l10n/generated/app_localizations.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 
 extension PumpApp on WidgetTester {
@@ -91,7 +91,7 @@ class TestServiceLocator {
   /// Setup test dependencies
   static void setup() {
     if (_getIt.isRegistered<GlobalKey<NavigatorState>>()) return;
-    
+
     _getIt.registerSingleton<GlobalKey<NavigatorState>>(
       GlobalKey<NavigatorState>(),
     );

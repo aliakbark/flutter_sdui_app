@@ -1,8 +1,9 @@
 import 'dart:async';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+
 import 'package:flutter_sdui_app/core/shared/states/app/app_cubit.dart';
 import 'package:flutter_sdui_app/features/onboarding/presentation/pages/get_started_page.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
 import '../../../../mocks/mock_network_info.dart';
 import '../../../../mocks/mock_preferences_service.dart';
@@ -50,7 +51,7 @@ void main() {
         findsOneWidget,
       );
       expect(find.text('Start SDUI Onboarding'), findsOneWidget);
-      expect(find.text('Traditional Onboarding'), findsOneWidget);
+      expect(find.text('Normal Onboarding'), findsOneWidget);
     });
   });
 }

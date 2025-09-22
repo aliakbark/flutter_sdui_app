@@ -4,8 +4,9 @@ import 'package:flutter_sdui_app/core/shared/data/models/app_language.dart';
 /// Service for managing app language configurations and operations
 class LanguageService {
   /// List of all supported languages in the app
+  /// Organized with base languages first, followed by regional variants
   static const List<AppLanguage> supportedLanguages = [
-    // English (default)
+    // English (base language)
     AppLanguage(
       languageCode: 'en',
       displayName: 'English',
@@ -13,7 +14,16 @@ class LanguageService {
       isRTL: false,
     ),
 
-    // Arabic (generic - covers all Arabic-speaking regions)
+    // English (United States) - regional variant
+    AppLanguage(
+      languageCode: 'en',
+      countryCode: 'US',
+      displayName: 'English (US)',
+      nativeName: 'English (United States)',
+      isRTL: false,
+    ),
+
+    // Arabic (base language)
     AppLanguage(
       languageCode: 'ar',
       displayName: 'Arabic',
@@ -21,7 +31,16 @@ class LanguageService {
       isRTL: true,
     ),
 
-    // Example for Chinese with variants:
+    // Arabic (Saudi Arabia) - regional variant
+    AppLanguage(
+      languageCode: 'ar',
+      countryCode: 'SA',
+      displayName: 'Arabic (Saudi Arabia)',
+      nativeName: 'العربية (السعودية)',
+      isRTL: true,
+    ),
+
+    // Future language examples:
     // AppLanguage(
     //   languageCode: 'zh',
     //   scriptCode: 'Hans',
@@ -36,6 +55,19 @@ class LanguageService {
     //   countryCode: 'TW',
     //   displayName: 'Chinese (Traditional)',
     //   nativeName: '中文 (繁體)',
+    //   isRTL: false,
+    // ),
+    // AppLanguage(
+    //   languageCode: 'fr',
+    //   displayName: 'French',
+    //   nativeName: 'Français',
+    //   isRTL: false,
+    // ),
+    // AppLanguage(
+    //   languageCode: 'fr',
+    //   countryCode: 'CA',
+    //   displayName: 'French (Canada)',
+    //   nativeName: 'Français (Canada)',
     //   isRTL: false,
     // ),
   ];

@@ -1,0 +1,82 @@
+{
+  "@@locale": "en",
+  "@@context": "Flutter SDUI Demo App - Base English translations",
+  "appTitle": "Flutter SDUI Demo App",
+  "@appTitle": {
+    "description": "The main title of the application displayed in app bars and splash screens",
+    "context": "App branding",
+    "maxLength": 30
+  },
+  "welcomeMessage": "Hey there!\nWelcome to Flutter SDUI Demo App",
+  "@welcomeMessage": {
+    "description": "Welcome message displayed on the get started page to greet new users",
+    "context": "Onboarding - Welcome screen",
+    "maxLength": 100
+  },
+  "startSduiOnboarding": "Start SDUI Onboarding",
+  "@startSduiOnboarding": {
+    "description": "Button text to initiate the Server-Driven UI onboarding flow",
+    "context": "Onboarding - Button action",
+    "maxLength": 25
+  },
+  "normalOnboarding": "Normal Onboarding",
+  "@normalOnboarding": {
+    "description": "Button text to start the traditional static onboarding flow",
+    "context": "Onboarding - Button action",
+    "maxLength": 25
+  },
+  "onboardingCompleted": "Onboarding completed successfully!",
+  "@onboardingCompleted": {
+    "description": "Success message displayed when user completes the onboarding process",
+    "context": "Onboarding - Success feedback",
+    "maxLength": 50
+  },
+  "errorMessage": "Error: {error}",
+  "@errorMessage": {
+    "description": "Generic error message template with dynamic error details",
+    "context": "Error handling - Generic errors",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network connection failed",
+        "description": "The specific error message or code"
+      }
+    }
+  },
+  "noInternetConnection": "No internet connection",
+  "@noInternetConnection": {
+    "description": "Message shown when device has no internet connectivity",
+    "context": "Error handling - Network errors",
+    "maxLength": 30
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Title for the settings/preferences page",
+    "context": "Navigation - Settings page",
+    "maxLength": 15
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Label for language selection setting",
+    "context": "Settings - Language preference",
+    "maxLength": 15
+  },
+  "theme": "Theme",
+  "@theme": {
+    "description": "Label for theme/appearance setting (light/dark mode)",
+    "context": "Settings - Theme preference",
+    "maxLength": 15
+  },
+  "english": "English",
+  "@english": {
+    "description": "Display name for English language option in language selector",
+    "context": "Settings - Language options",
+    "maxLength": 20
+  },
+  "arabic": "العربية",
+  "@arabic": {
+    "description": "Display name for Arabic language option in language selector (shown in Arabic)",
+    "context": "Settings - Language options",
+    "maxLength": 20
+  }
+}
