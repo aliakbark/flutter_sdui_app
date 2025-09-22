@@ -263,8 +263,6 @@ flutter test --coverage
 # Run specific test file
 flutter test test/features/auth/auth_test.dart
 
-# Run integration tests
-flutter test integration_test/
 ```
 
 **Test Structure:**
@@ -286,10 +284,10 @@ git checkout -b feature/my-awesome-feature
 ```
 
 **Branch Naming Conventions:**
-- `feature/` - New features
-- `bugfix/` - Bug fixes
-- `docs/` - Documentation updates
-- `refactor/` - Code refactoring
+- `feat: ` - New features
+- `fix: ` - Bug fixes
+- `docs: ` - Documentation updates
+- `refactor: ` - Code refactoring
 
 ### 3. Make Your Changes
 - Follow the existing code style and architecture
