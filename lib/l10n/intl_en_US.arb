@@ -1,0 +1,82 @@
+{
+  "@@locale": "en_US",
+  "@@context": "Flutter SDUI Demo App - US English translations (overrides)",
+  "appTitle": "Flutter SDUI Demo App",
+  "@appTitle": {
+    "description": "US-specific app title with American English conventions",
+    "context": "App branding - US market",
+    "maxLength": 30
+  },
+  "welcomeMessage": "Hey there!\nWelcome to the Flutter SDUI Demo App",
+  "@welcomeMessage": {
+    "description": "US-specific welcome message with American English phrasing",
+    "context": "Onboarding - Welcome screen - US",
+    "maxLength": 100
+  },
+  "errorMessage": "Error: {error}",
+  "@errorMessage": {
+    "description": "US-specific error message format",
+    "context": "Error handling - US format",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network connection failed",
+        "description": "The specific error message using US terminology"
+      }
+    }
+  },
+  "noInternetConnection": "No internet connection",
+  "@noInternetConnection": {
+    "description": "US-specific no internet message",
+    "context": "Error handling - Network errors - US",
+    "maxLength": 30
+  },
+  "startSduiOnboarding": "Start SDUI Onboarding",
+  "@startSduiOnboarding": {
+    "description": "US-specific button text to initiate the Server-Driven UI onboarding flow",
+    "context": "Onboarding - Button action - US",
+    "maxLength": 25
+  },
+  "normalOnboarding": "Normal Onboarding",
+  "@normalOnboarding": {
+    "description": "US-specific button text to start the traditional static onboarding flow",
+    "context": "Onboarding - Button action - US",
+    "maxLength": 25
+  },
+  "onboardingCompleted": "Onboarding completed successfully!",
+  "@onboardingCompleted": {
+    "description": "US-specific success message displayed when user completes the onboarding process",
+    "context": "Onboarding - Success feedback - US",
+    "maxLength": 50
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "US-specific title for the settings/preferences page",
+    "context": "Navigation - Settings page - US",
+    "maxLength": 15
+  },
+  "language": "Language",
+  "@language": {
+    "description": "US-specific label for language selection setting",
+    "context": "Settings - Language preference - US",
+    "maxLength": 15
+  },
+  "theme": "Theme",
+  "@theme": {
+    "description": "US-specific label for theme/appearance setting (light/dark mode)",
+    "context": "Settings - Theme preference - US",
+    "maxLength": 15
+  },
+  "english": "English",
+  "@english": {
+    "description": "US-specific display name for English language option in language selector",
+    "context": "Settings - Language options - US",
+    "maxLength": 20
+  },
+  "arabic": "العربية",
+  "@arabic": {
+    "description": "US-specific display name for Arabic language option in language selector (shown in Arabic)",
+    "context": "Settings - Language options - US",
+    "maxLength": 20
+  }
+}

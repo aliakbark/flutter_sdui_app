@@ -7,7 +7,7 @@ import 'package:flutter_sdui_app/core/shared/services/language_service.dart';
 import 'package:flutter_sdui_app/core/shared/states/app/app_cubit.dart';
 import 'package:flutter_sdui_app/features/auth/presentation/states/authentication_cubit.dart';
 import 'package:flutter_sdui_app/features/auth/presentation/widget/auth_wrapper.dart';
-import 'package:flutter_sdui_app/l10n/app_localizations.dart';
+import 'package:flutter_sdui_app/l10n/generated/app_localizations.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

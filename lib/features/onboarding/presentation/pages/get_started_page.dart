@@ -6,7 +6,7 @@ import 'package:flutter_sdui_app/features/onboarding/data/repositories/onboardin
 import 'package:flutter_sdui_app/features/onboarding/presentation/pages/otp_send_page.dart';
 import 'package:flutter_sdui_app/features/onboarding/presentation/states/onboarding_cubit.dart';
 import 'package:flutter_sdui_app/features/sdui/workflows/onboarding/onboarding_workflow.dart';
-import 'package:flutter_sdui_app/l10n/app_localizations.dart';
+import 'package:flutter_sdui_app/l10n/generated/app_localizations.dart';
 import 'package:sdui/sdui.dart';
 
 class GetStartedPage extends StatelessWidget {
